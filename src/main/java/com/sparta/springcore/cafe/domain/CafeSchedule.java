@@ -1,5 +1,6 @@
-package sparta.projectprac.cafe.domain;
+package com.sparta.springcore.cafe.domain;
 
+import com.sparta.springcore.model.Timestamped;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,13 +11,12 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CafeSchedule {
+public class CafeSchedule extends Timestamped {
 
     @Id
     @GeneratedValue
     @Column(name = "cafe_schedule_number")
     private Long id;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cafe_number")
@@ -25,10 +25,10 @@ public class CafeSchedule {
     private LocalDate cafeScheduleStartDate;
     private LocalDate cafeScheduleEndDate;
 
-    // 뭐가 들어가는건지 모르겠음.
     private String cafeScheduleInfo;
-
 
     @Enumerated(EnumType.STRING) // EnumType.ORDINAL은 숫자로 들어감 사용하지 말 것.
     private CafeScheduleType cafeScheduleType;
+
+    private int cafeSchedulePrice;
 }

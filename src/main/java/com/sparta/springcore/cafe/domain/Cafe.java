@@ -1,47 +1,40 @@
-package sparta.projectprac.cafe.domain;
+package com.sparta.springcore.cafe.domain;
+import com.sparta.springcore.cafe.dto.CafeCreatRequestDto;
+import com.sparta.springcore.model.Timestamped;
+import com.sparta.springcore.model.User;
+import lombok.*;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-import sparta.projectprac.common.Timestamped;
-import sparta.projectprac.user.model.User;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED) // 다른곳에서 생성자 못쓰도록 막아둠
-public class Cafe extends Timestamped{
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor // 다른곳에서 생성자 못쓰도록 막아둠
+public class Cafe extends Timestamped {
 
     @Id @GeneratedValue
     @Column(name = "cafe_number")
     private Long id;
 
-    // 단반향 연관관계
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_number")
-    private User user;
-
     @Column(nullable = false)
     private String cafeName;
 
-    // zipcode == zonecode 필요 없어 보여서 지워도 될듯
-    // 지번주소, 도로명주소 
-    private String cafeJibunAddress;
+    private int cafeZonecode;
 
-    private String cafeRoadAddress;
+    private String cafeAddress;
 
     @Column(nullable = false)
     private String cafeAddressDetail;
 
-    // 위도 : y : Latitude
-    @Column(nullable = false)
-    private String cafeX;
-
     // 경도 : x : Longitude
-    @Column(nullable = false)
-    private String cafeY;
+    private Double cafeX;
+
+    // 위도 : y : Latitude
+    private Double cafeY;
 
     private String cafeInfo;
 
@@ -49,10 +42,46 @@ public class Cafe extends Timestamped{
 
     private String cafePrecaution;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private int cafeWeekdayPrice;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private int cafeWeekendPrice;
+
+    // 단반향 연관관계
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_number")
+    private User user;
+
+//    @OneToMany(mappedBy = "cafe")
+//    private List<CafeOption> cafeOptions = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "cafe")
+//    private List<CafeImage> cafeImages = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "cafe")
+//    private List<CafeReview> cafeReviews = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "cafe")
+//    private List<CafeSchedule> cafeSchedules = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "cafe")
+//    private List<Event> events = new ArrayList<>();
+
+    public Cafe(CafeCreatRequestDto requestDto, User user) {
+        this.cafeName = requestDto.getCafeName();
+        this.cafeZonecode = requestDto.getCafeZonecode();
+        this.cafeAddress = requestDto.getCafeAddress();
+        this.cafeAddressDetail = requestDto.getCafeAddressDetail();
+        this.cafeX = requestDto.getCafeX();
+        this.cafeY = requestDto.getCafeY();
+        this.cafeInfo = requestDto.getCafeInfo();
+        this.cafeInfoDetail = requestDto.getCafeInfoDetail();
+        this.cafePrecaution = requestDto.getCafePrecaution();
+        this.cafeWeekdayPrice = requestDto.getCafeWeekdayPrice();
+        this.cafeWeekendPrice = requestDto.getCafeWeekendPrice();
+        this.user = user;
+    }
+
 
 }
