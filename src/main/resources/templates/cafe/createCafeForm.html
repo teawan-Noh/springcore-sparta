@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="container">
-    <form role="form" action="/cafes" th:object="${cafeRequestDto}" method="post">
+    <form role="form" action="/cafes" th:object="${cafeCreatRequestDto}" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label th:for="cafeName">카페 이름</label>
             <input type="text" th:field="*{cafeName}" class="form-control" placeholder="카페 이름을 입력하세요"
@@ -57,6 +57,12 @@
             <input type="text" th:field="*{cafeWeekendPrice}" class="form-control" placeholder="주말 가격 입력하세요">
         </div>
 
+        <ul>
+            <li>상품명 <input type="text" name="itemName"></li>
+            <li>첨부파일<input type="file"  name="attachFile" ></li>
+            <li>이미지 파일들<input type="file" multiple="multiple" th:field="*{files}" name="imageFiles" ></li>
+        </ul>
+
         <button type="submit" class="btn btn-primary">카페 등록</button>
     </form>
 
@@ -85,6 +91,9 @@
     </div>
     <br/>
 </div>
+<form action="/test" method="post" >
+
+</form>
 <script src="/js/kakaoMapApi.js"></script>
 </body>
 

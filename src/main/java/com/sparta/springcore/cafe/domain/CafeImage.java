@@ -1,10 +1,7 @@
 package com.sparta.springcore.cafe.domain;
 
 import com.sparta.springcore.model.Timestamped;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,7 +9,7 @@ import javax.persistence.*;
 @Getter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CafeImage extends Timestamped {
 
     @Id
@@ -24,5 +21,12 @@ public class CafeImage extends Timestamped {
     @JoinColumn(name = "cafe_number")
     private Cafe cafe;
 
+    private String cafeOriginImageName;
     private String cafeImageUrl;
+
+    public CafeImage(String cafeOriginImageName, String cafeImageUrl, Cafe cafe){
+        this.cafeOriginImageName = cafeOriginImageName;
+        this.cafeImageUrl = cafeImageUrl;
+        this.cafe = cafe;
+    }
 }

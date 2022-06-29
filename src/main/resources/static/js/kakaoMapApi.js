@@ -22,8 +22,6 @@ let x;
 let y;
 
 function getAddressInfo(){
-    alert(zonecode);
-    alert(addr);
     $('#zonecode').val(zonecode);
     $('#address').val(addr);
     $('#cafeY').val(y);
@@ -60,7 +58,6 @@ function execDaumPostcode() {
                     map.setCenter(coords);
                     // 마커를 결과값으로 받은 위치로 옮긴다.
                     marker.setPosition(coords)
-                    alert(coords);
                 }
             });
         }

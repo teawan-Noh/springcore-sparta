@@ -1,8 +1,10 @@
 package com.sparta.springcore.cafe.dto;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Data
 public class CafeCreatRequestDto {
@@ -32,4 +34,7 @@ public class CafeCreatRequestDto {
     private Integer cafeWeekdayPrice;
 
     private Integer cafeWeekendPrice;
+
+    private List<MultipartFile> files;
+
 }
