@@ -24,9 +24,13 @@ public class CafeImage extends Timestamped {
     private String cafeOriginImageName;
     private String cafeImageUrl;
 
-    public CafeImage(String cafeOriginImageName, String cafeImageUrl, Cafe cafe){
+    public CafeImage(String cafeOriginImageName, String cafeImageUrl){
         this.cafeOriginImageName = cafeOriginImageName;
         this.cafeImageUrl = cafeImageUrl;
+//        this.cafe = cafe;
+    }
+
+    public void addCafe(Cafe cafe){
         this.cafe = cafe;
     }
 }

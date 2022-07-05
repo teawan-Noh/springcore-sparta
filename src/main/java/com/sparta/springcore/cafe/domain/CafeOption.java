@@ -22,7 +22,17 @@ public class CafeOption {
     private Cafe cafe;
 
     @Column(nullable = false)
-    private String cafeOptionName;
+//    @Enumerated(EnumType.STRING)
+    private CafeOptionType cafeOptionType;
 
     private String cafeOptionIcon;
+
+    public CafeOption(CafeOptionType option){
+        this.cafeOptionType = option;
+//        this.cafe = cafe;
+    }
+
+    public void addCafe(Cafe cafe) {
+        this.cafe = cafe;
+    }
 }

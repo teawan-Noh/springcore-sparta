@@ -13,8 +13,21 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=54ccebb7b25645894bc9636f54e8617a&libraries=services,clusterer,drawing"></script>
     <!--    <link rel="stylesheet" type="text/css" href="/css/style.css">-->
+    <script>
+        function test(){
+            $.ajax({
+                type: "GET",
+                url: "/cafes",
+                data: {},
+                success: function(response){
+                    console.log(response)
+                }
+            })
+        }
+    </script>
 </head>
 <body>
+<p th:text="${userEmail}"></p>
 <div class="container">
     <form role="form" action="/cafes" th:object="${cafeCreatRequestDto}" method="post" enctype="multipart/form-data">
         <div class="form-group">
@@ -35,7 +48,18 @@
             <label th:for="cafePrecaution">주의 사항</label>
             <input type="text" th:field="*{cafePrecaution}" class="form-control" placeholder="주의사항을 입력하세요">
         </div>
-
+        <br />
+        <div>
+            <label th:for="options">사용 가능 옵션을 체크해 주세요</label>
+            <div class="form-check">
+                <label class="form-check-label form-check-inline"><input type="checkbox" class="form-check-input" name="options" value="PARK"> 주차 가능 &nbsp;</label>
+                <label class="form-check-label form-check-inline"><input type="checkbox" class="form-check-input" name="options" value="FOOD"> 음식물 반입 가능 &nbsp;</label>
+                <label class="form-check-label form-check-inline"><input type="checkbox" class="form-check-input" name="options" value="WIFI"> WIFI &nbsp;</label>
+                <label class="form-check-label form-check-inline"><input type="checkbox" class="form-check-input" name="options" value="NOSMOKE"> 금연 &nbsp;</label>
+                <label class="form-check-label form-check-inline"><input type="checkbox" class="form-check-input" name="options" value="PROJECTOR"> 프로젝터 &nbsp;</label>
+            </div>
+        </div>
+        <br />
         <div class="form-group">
             <label th:for="city">주소</label>
             <!-- Button to Open the Modal -->
@@ -56,10 +80,9 @@
             <label th:for="cafeWeekendPrice">주말 가격</label>
             <input type="text" th:field="*{cafeWeekendPrice}" class="form-control" placeholder="주말 가격 입력하세요">
         </div>
-
+        <br />
         <ul>
-            <li>상품명 <input type="text" name="itemName"></li>
-            <li>첨부파일<input type="file"  name="attachFile" ></li>
+            <li>첨부파일<input type="file" name="attachFile" ></li>
             <li>이미지 파일들<input type="file" multiple="multiple" th:field="*{files}" name="imageFiles" ></li>
         </ul>
 
@@ -91,9 +114,9 @@
     </div>
     <br/>
 </div>
-<form action="/test" method="post" >
-
-</form>
+<div>
+    <button onclick="test()">test</button>
+</div>
 <script src="/js/kakaoMapApi.js"></script>
 </body>
 

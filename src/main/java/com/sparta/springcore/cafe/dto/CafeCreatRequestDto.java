@@ -1,5 +1,6 @@
 package com.sparta.springcore.cafe.dto;
 
+import com.sparta.springcore.cafe.domain.CafeOptionType;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,5 +37,7 @@ public class CafeCreatRequestDto {
     private Integer cafeWeekendPrice;
 
     private List<MultipartFile> files;
+
+    private List<CafeOptionType> options;
 
 }

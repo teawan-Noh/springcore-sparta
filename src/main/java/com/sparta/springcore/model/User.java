@@ -1,10 +1,13 @@
 package com.sparta.springcore.model;
 
+import com.sparta.springcore.cafe.domain.Cafe;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter // get 함수를 일괄적으로 만들어줍니다.
@@ -50,4 +53,13 @@ public class User extends Timestamped {
 
     @Column(nullable = true)
     private Long kakaoId;
+
+    @OneToMany(mappedBy = "user")
+    private List<Cafe> cafes = new ArrayList<>();
+
+    // cafe쪽에 연관관계 메소드 구현
+//    public void addCafe(Cafe cafe) {
+//        cafe.addUser(this);
+//        this.cafes.add(cafe);
+//    }
 }
